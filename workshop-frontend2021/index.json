@@ -1,0 +1,124 @@
+{
+  "time": "50 minutes",
+  "title": "Running Synthetics Tests in a CI/CD Pipeline",
+  "details": {
+    "intro": {
+      "courseData": "background.sh",
+      "code": "foreground.sh",
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "text": "first-deploy.md",
+        "title": "First Deployment"
+      },
+      {
+        "text": "create-browser-test.md",
+        "title": "Create a Browser Test"
+      },
+      {
+        "text": "trigger-test.md",
+        "title": "Trigger the Browser Test"
+      },
+      {
+        "text": "add-test-to-pipeline.md",
+        "title": "Add the Browser Test to the Pipeline"
+      },
+      {
+        "text": "introduce-regression.md",
+        "title": "Introduce a Regression"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "docker-compose-storedog.yml",
+          "target": "/root/lab"
+        },
+        {
+          "file": "regression.patch",
+          "target": "/root/lab"
+        },
+        {
+          "file": "frontend_helper.rb",
+          "target": "/root/lab/staging"
+        },
+        {
+          "file": "discounts_controller.rb",
+          "target": "/root/lab/staging"
+        },
+        {
+          "file": "set_secrets.sh",
+          "target": "/root/lab/cicd"
+        },
+        {
+          "file": "docker-compose.yml",
+          "target": "/root/lab/cicd"
+        },
+        {
+          "file": "seed.sql",
+          "target": "/root/lab/cicd"
+        },
+        {
+          "file": "labuser.git.tgz",
+          "target": "/root/lab/cicd"
+        },
+        {
+          "file": "droneio.database.sqlite",
+          "target": "/root/lab/cicd"
+        },
+        {
+          "file": "package.json",
+          "target": "/root/lab/cicd"
+        },
+        {
+          "file": "gogs.app.ini",
+          "target": "/root/lab/cicd"
+        },
+        {
+          "file": "git-credentials",
+          "target": "/root/lab/cicd"
+        },
+        {
+          "file": "drone-runner-exec.conf",
+          "target": "/root/lab/cicd"
+        },
+        {
+          "file": "drone-staging.yml",
+          "target": "/root/lab/cicd"
+        }
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "terminal",
+    "showide": true,
+    "uieditorpath": "/root",
+    "showdashboard": true,
+    "dashboards": [
+      {
+        "name": "Production",
+        "port": 3030
+      },
+      {
+        "name": "Staging",
+        "port": 3031
+      },
+      {
+        "name": "Gogs",
+        "port": 8300
+      },
+      {
+        "name": "Drone",
+        "port": 8800
+      }
+    ]
+  },
+  "backend": {
+    "imageid": "datadog-base-v2",
+    "reuseConnection": "false"
+  }
+}
