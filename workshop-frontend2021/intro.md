@@ -1,1 +1,7 @@
-In this lab you'll work with your old friend Storedog, as well as staging instances of the Storedog frontend and discounts services. You'll also have a full CI/CD pipeline at your disposal to build and deploy the discounts service. That's a lot of stuff to bring online, so please be patient as it starts up! Click the **Start Scenario** button below to get started.
+# Welcome Observability Spotlight Attendees!
+
+In this lab you'll be working with an eCommerce app called _Storedog_, and you’ll be staging instances of Storedog’s frontend and discounts services. In addition, you’ll have a full CI/CD pipeline at your disposal to build and deploy its discounts service.
+
+_Thank you for your patience as all of this boots up!_
+
+Click the **Start Scenario** button below to get started.
