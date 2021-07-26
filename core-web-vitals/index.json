@@ -1,0 +1,83 @@
+{
+  "title": "Introduction to Core Web Vitals",
+  "description": "Introduction to Core Web Vitals (CWVs)",
+  "time": "60 minutes",
+  "difficulty": "Intermediate",
+  "details": {
+    "intro": {
+      "courseData": "background.sh",
+      "code": "foreground.sh",
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "text": "step1.md",
+        "title": "What are Core Web Vitals?"
+      },
+      {
+        "text": "step2.md",
+        "title": "Setting up Datadog RUM to collect metrics for CWVs"
+      },
+      {
+        "text": "step3.md",
+        "title": "Tracking CWVs in the Browser"
+      },
+      {
+        "text": "step4.md",
+        "title": "Tracking CWVs with Datadog Real User Monitoring"
+      },
+      {
+        "text": "step5.md",
+        "title": "Using Datadog RUM to understand your CWV report in Production"
+      },
+      {
+        "text": "step6.md",
+        "title": "Setting up alerts so you can maintain excellent CWV scores"
+      },
+      {
+        "text": "step7.md",
+        "title": "What to do with a bad CWV report"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "envready",
+          "target": "/usr/local/bin/",
+          "chmod": "+x"
+        },
+        {
+          "file": "docker-compose-fixed.yml",
+          "target": "/root"
+        },
+        {
+          "file": "docker-compose-slow.yml",
+          "target": "/root"
+        },
+        {
+          "file": "docker-compose-broken.yml",
+          "target": "/root"
+        },
+        {
+          "file": "frontend-docker-entrypoint.sh",
+          "target": "/root"
+        }
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "terminal",
+    "showide": "true",
+    "uieditorpath": "/ecommworkshop", 
+    "hideHiddenFiles": true,
+    "exclusionPatterns": ["**/store-frontend/tmp/*", "**/store-frontend/log/*"],
+    "showdashboard": true,
+    "dashboards": [{"name": "storedog", "port": 3000}]
+  },
+  "backend": {
+    "imageid": "datadog-base-v2"
+  }
+}
