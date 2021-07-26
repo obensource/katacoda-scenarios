@@ -1,4 +1,4 @@
-Now that you have an end-to-end test, you can experiment with triggering it on demand. First, you'll use the cURL CLI tool to make requests to the synthetics API directly. Then, you'll use the datadog-ci tool to do the heavy lifting for you.
+Now that you have an end-to-end test, you can experiment with triggering it on demand. First, you'll use the `cURL` CLI tool to make requests to the synthetics API directly. Then, you'll use the `datadog-ci` tool to do the heavy lifting for you.
 
 ## Get the Browser Test Id
 Synthetic tests have alphanumeric public IDs in the form of `abc-def-ghi`. You're going to need this ID to trigger the test using the API. You can find it within the URL in a couple places on the synthetic test details page:
@@ -14,7 +14,7 @@ When you have the public ID for your browser test, set it as an environment vari
 Note: the following steps assume that the environment variable `DD_API_KEY` is set to your API key, and `DD_APP_KEY` is set to your Application key. The lab already has these variables set. You can find your API key in the Datadog app under **Integrations > API Keys**. You can find the Application key under **Team > Application Keys**.
 
 ## Trigger The Test Using the API
-First, trigger the browser test using the cURL command. This will illustrate how the API works at a low level. The workflow is to POST a request to trigger a test, and then to GET the results of the test back. 
+First, trigger the browser test using the `cURL` command. This will illustrate how the API works at a low level. The workflow is to POST a request to trigger a test, and then to GET the results of the test back. 
 
 Click the following block of code to execute this request for your browser test:
 
@@ -83,7 +83,7 @@ yarn datadog-ci synthetics run-tests \
 --appKey $DD_APP_KEY
 ```{{execute}}
 
-You will start seeing nicely formatted output as datadog-ci triggers the test, and fetches the results. 
+You will start seeing nicely formatted output as `datadog-ci` triggers the test, and fetches the results. 
 
 ![datadog-ci running a passing browser test](./assets/datadog_ci_test_complete_pass.png)
 
@@ -97,7 +97,7 @@ If your test failed, you will see the results in a red font color, with red X's 
 
 By default, the CI/CD pipeline will halt when a command exits with an error code. If you insert this test after the pipeline deploys to staging, it will halt without deploying to production. 
 
-In some cases, you may want datadog-ci to return a different code when synthetic tests fails. This can be configured in the execution rule drop-down of the synthetic test details page:
+In some cases, you may want `datadog-ci` to return a different code when synthetic tests fails. This can be configured in the execution rule drop-down of the synthetic test details page:
 
     ![Test execution rule](./assets/test_properties_execution_rule.png)
 
