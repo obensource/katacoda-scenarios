@@ -1,19 +1,20 @@
-Now that you have an end-to-end test, you can experiment with triggering it on demand. First, you'll use cURL to make requests to the synthetics API directly. Then, you'll use datadog-ci to do the heavy lifting for you.
+Now that you have an end-to-end test, you can experiment with triggering it on demand. First, you'll use the cURL CLI tool to make requests to the synthetics API directly. Then, you'll use the datadog-ci tool to do the heavy lifting for you.
+
 ## Get the Browser Test Id
-Synthetic tests have alphanumeric public ids in the form of `abc-def-ghi`. You're going to need this id to trigger the test using the API. You can find it in the URL in a couple places on the synthetic test details page:
+Synthetic tests have alphanumeric public IDs in the form of `abc-def-ghi`. You're going to need this ID to trigger the test using the API. You can find it within the URL in a couple places on the synthetic test details page:
 
 1. In the URL. For example, in `https://app.datadoghq.com/synthetics/details/rdk-xkx-d7x`, the public id is `rdk-xkx-d7x`. 
 1. Under **Properties** in the upper-left corner of the page: 
     ![Synthetic test properties card](./assets/test_properties.png)
 
-When you have the public id for your browser test, set it as an environment variable in the lab terminal, replacing `abc-def-ghi` with your public id:
+When you have the public ID for your browser test, set it as an environment variable in the lab terminal, replacing `abc-def-ghi` with your public id:
 
 `export DD_TEST_PUBLIC_ID=abc-def-ghi`
 
-Note that the following steps assume that the environment variable `DD_API_KEY` is set to your API key, and `DD_APP_KEY` is set to your Application key. The lab already has these variables set. You can find your API key in the Datadog app under **Integrations > API Keys**. You can find the Application key under **Team > Application Keys**.
+Note: the following steps assume that the environment variable `DD_API_KEY` is set to your API key, and `DD_APP_KEY` is set to your Application key. The lab already has these variables set. You can find your API key in the Datadog app under **Integrations > API Keys**. You can find the Application key under **Team > Application Keys**.
 
 ## Trigger The Test Using the API
-First, trigger the browser test using cURL. This will illustrate how the API works at a low level. The workflow is to POST a request to trigger a test, and then to GET the results of the test. 
+First, trigger the browser test using the cURL command. This will illustrate how the API works at a low level. The workflow is to POST a request to trigger a test, and then to GET the results of the test back. 
 
 Click the following block of code to execute this request for your browser test:
 
@@ -51,7 +52,7 @@ curl -G \
     -d "result_ids=[${DD_TEST_RESULT_ID}]"
 ```{{execute}}
 
-If hasn't completed, the `result` key in the response will contain `{"eventType": "created"}`, and you should repeat the request until it is complete.
+If hasn't completed, the `result` key in the response will contain `{"eventType": "created"}`, and you should repeat this request until it is complete.
 
 When the test is complete, the results from this request will be quite large, containing all of the test result details. 
 
@@ -62,17 +63,19 @@ Visit the synthetic test's details page and find the result under **Test Results
 Tests results triggered by CI will be listed alongside those that are triggered manually and those scheduled to run automatically. This helps you compare the results you get in each of these testing contexts.
 
 Back in the terminal, the most important key in the API result is `passed`, a boolean value:
+
 ![Passed key in API results](./assets/terminal_passed_true.png)
+
 You could halt the pipeline if this is `false`, or continue deploying if this is `true`.
 
 You can read more about the variety of API endpoints, parameters, and responses in the [Datadog API Reference for Synthetics](https://docs.datadoghq.com/api/latest/synthetics/).
 
-The synthetics API opens the opportunity for custom test monitoring, triggering, and reporting. But working with it this way is not ideal for a lean, flexible, and easy to maintain pipeline. Fortunately, Datadog developed an open source CLI client to easily incorporate synthetic tests into CI/CD pipelines!
+The synthetics API opens the opportunity for custom test monitoring, triggering, and reporting. But working with it this way is not ideal for a pipeline that's lean, flexible, and easy to maintain. Fortunately, Datadog developed an open source CLI client to simplify incorporating synthetic tests into CI/CD pipelines!
 
 ## Trigger The Test Using datadog-ci
-The Datadog CLI client is a Node Package Manager module called [@datadog/datadog-ci](https://www.npmjs.com/package/@datadog/datadog-ci). It does the hard work of communicating with the API for you. It's already installed in the lab, so you can start using it immediately. 
+The Datadog CLI client is a Node Package Manager (npm) module called [@datadog/datadog-ci](https://www.npmjs.com/package/@datadog/datadog-ci). It does the hard work of communicating with the API for you. It's already installed in the lab, so you can start using it immediately. 
 
-In the terminal, run the command `cd /root/lab/cicd`{{execute}} and run the following command:
+In the terminal, run the command `cd /root/lab/cicd`{{execute}}, and run the following command:
 ```shell
 yarn datadog-ci synthetics run-tests \
 --public-id $DD_TEST_PUBLIC_ID \
@@ -80,15 +83,15 @@ yarn datadog-ci synthetics run-tests \
 --appKey $DD_APP_KEY
 ```{{execute}}
 
-You will start seeing nicely formatted output as datadog-ci triggers the test and fetches the results. 
+You will start seeing nicely formatted output as datadog-ci triggers the test, and fetches the results. 
 
 ![datadog-ci running a passing browser test](./assets/datadog_ci_test_complete_pass.png)
 
-If your test passed, you will see the results in green font colors, with green check marks next to each test run.
+If your test passed, you will see the results in a green font color, with green check marks next to each test run.
 
 ![datadog-ci running a failing browser test](./assets/datadog_ci_test_complete_fail.png)
 
-If your test failed, you will see the results in red font colors, with red X's next to each test run, as well as one very important terminal message:
+If your test failed, you will see the results in a red font color, with red X's next to each test run, as well as one very important terminal message:
 
 > error Command failed with exit code 1
 
