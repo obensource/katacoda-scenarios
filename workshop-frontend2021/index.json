@@ -1,6 +1,6 @@
 {
   "time": "50 minutes",
-  "title": "Optimizing User Journeys by adding Synthetic Tests to a CI/CD Pipeline",
+  "title": "Using Synthetic Tests in a CI/CD Pipeline to Optimize User Journeys",
   "details": {
     "intro": {
       "courseData": "background.sh",
