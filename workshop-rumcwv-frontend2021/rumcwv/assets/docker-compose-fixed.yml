@@ -27,17 +27,17 @@ services:
       - POSTGRES_HOST=db
       - DD_ENV=development
       - DD_SERVICE=discounts-service
-      - DD_VERSION=1.0
+      - DD_VERSION=1.1
       - DD_AGENT_HOST=agent
       - DD_LOGS_INJECTION=true
       - DD_TRACE_ANALYTICS_ENABLED=true
       - DD_PROFILING_ENABLED=true
-    image: "ddtraining/discounts:2.0.0"
-    command: [sh, -c, "pip install ddtrace -U && ddtrace-run flask run --port=5001 --host=0.0.0.0"]
+    image: "ddtraining/discounts-fixed:2.0.0"
+    command: [sh, -c, "pip install -r requirements.txt && ddtrace-run flask run --port=5001 --host=0.0.0.0"]
     ports:
       - "5001:5001"
     volumes:
-      - "/ecommworkshop/discounts-service:/app"
+      - "/ecommworkshop/discounts-service-fixed:/app"
     depends_on:
       - agent
       - db
@@ -45,7 +45,7 @@ services:
       com.datadoghq.ad.logs: '[{"source": "python", "service": "discounts-service"}]'
       com.datadoghq.tags.env: "development"
       com.datadoghq.tags.service: "discounts-service"
-      com.datadoghq.tags.version: "1.0"
+      com.datadoghq.tags.version: "1.1"
       my.custom.label.team: "discounts"
   frontend:
     environment:
@@ -54,17 +54,18 @@ services:
       - DD_TRACE_ANALYTICS_ENABLED=true
       - DD_ENV=development
       - DD_SERVICE=store-frontend
-      - DD_VERSION=1.0
+      - DD_VERSION=1.1
       - DB_USERNAME
       - DB_PASSWORD
       - DD_CLIENT_TOKEN
       - DD_APPLICATION_ID
-    image: "ddtraining/storefront:2.0.0"
+      - DD_DISCOUNTS_URL
+    image: "ddtraining/storefront-fixed:2.0.0"
     command: sh docker-entrypoint.sh
     ports:
       - "3000:3000"
     volumes:
-      - "/ecommworkshop/store-frontend-broken-instrumented:/app"
+      - "/ecommworkshop/store-frontend-instrumented-fixed:/app"
     depends_on:
       - agent
       - db
@@ -74,7 +75,7 @@ services:
       com.datadoghq.ad.logs: '[{"source": "ruby", "service": "store-frontend"}]'
       com.datadoghq.tags.env: "development"
       com.datadoghq.tags.service: "store-frontend"
-      com.datadoghq.tags.version: "1.0"
+      com.datadoghq.tags.version: "1.1"
       my.custom.label.team: "frontend"
   advertisements:
     environment:
@@ -85,17 +86,17 @@ services:
       - POSTGRES_HOST=db
       - DD_ENV=development
       - DD_SERVICE=advertisements-service
-      - DD_VERSION=1.0
+      - DD_VERSION=1.1
       - DD_AGENT_HOST=agent
       - DD_LOGS_INJECTION=true
       - DD_TRACE_ANALYTICS_ENABLED=true
       - DD_PROFILING_ENABLED=true
-    image: "ddtraining/advertisements:2.0.0"
+    image: "ddtraining/advertisements-fixed:2.0.0"
     command: [sh, -c, "pip install ddtrace -U && ddtrace-run flask run --port=5002 --host=0.0.0.0"]
     ports:
       - "5002:5002"
     volumes:
-      - "/ecommworkshop/ads-service:/app"
+      - "/ecommworkshop/ads-service-fixed:/app"
     depends_on:
       - agent
       - db
@@ -103,7 +104,7 @@ services:
       com.datadoghq.ad.logs: '[{"source": "python", "service": "advertisements-service"}]'
       com.datadoghq.tags.env: "development"
       com.datadoghq.tags.service: "advertisements-service"
-      com.datadoghq.tags.version: "1.0"
+      com.datadoghq.tags.version: "1.1"
       my.custom.label.team: "advertisements"
   db:
     image: postgres:11-alpine

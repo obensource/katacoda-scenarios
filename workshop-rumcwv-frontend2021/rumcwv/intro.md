@@ -1,9 +1,12 @@
 Datadog’s Real User Monitoring (RUM) gives you end-to-end visibility into the real-time activity and experience of individual users in your web and mobile applications. RUM is designed to solve four types of use cases:
 
-- Performance: Track the performance of web pages, mobile application screens, user actions, network requests, and your front-end code.
-- Error Management: Monitor the ongoing bugs and issues and track them over time and versions.
-- Analytics / Usage: Understand who is using your application (country, device, OS), monitor individual user journeys, and analyze how users interact with your application (most common page visits, clicks, interactions, feature usage).
-- Support: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors).
+<ul style="max-width: 75vw;  margin: auto;">
+<li>Performance: Track the performance of web pages, mobile application screens, user actions, network requests, and your front-end code.</li>
+<li>Error Management: Monitor the ongoing bugs and issues and track them over time and versions.</li>
+<li>Analytics / Usage: Understand who is using your application (country, device, OS), monitor individual user journeys, and analyze how users interact with your application (most common page visits, clicks, interactions, feature usage).</li>
+<li>Support: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors).</li>
+</ul>
+
 
 In May 2020, Google introduced Core Web Vitals (CWVs), a set of three metrics that serve as the gold standard for monitoring a site’s UX performance. These metrics, which focus on load performance, interactivity, and visual stability, simplify UX metric collection by signaling which frontend performance indicators matter the most.
 

@@ -62,7 +62,23 @@
           "target": "/root"
         },
         {
-          "file": "frontend-docker-entrypoint.sh",
+          "file": "index.html.erb",
+          "target": "/root"
+        },
+        {
+          "file": "spree_application.html.erb",
+          "target": "/root"
+        },
+        {
+          "file": "home_controller.rb",
+          "target": "/root"
+        },
+        {
+          "file": "discounts.py",
+          "target": "/root"
+        },
+        {
+          "file": "discounts-requirements.txt",
           "target": "/root"
         }
       ]

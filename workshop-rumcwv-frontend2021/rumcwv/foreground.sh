@@ -2,25 +2,13 @@
 
 export POSTGRES_USER=postgres
 export POSTGRES_PASSWORD=postgres
-
-statuscheck files
+export DD_DISCOUNTS_URL=https://[[HOST_SUBDOMAIN]]-5001-[[KATACODA_HOST]].environments.katacoda.com/discount
 
 cd /ecommworkshop
-rm -r ./store-frontend-instrumented-fixed
-rm -r ./store-frontend-broken-instrumented
-rm -r ./ads-service
-rm -r ./ads-service-fixed
-rm -r ./discounts-service
-rm -r ./discounts-service-fixed
-
 git fetch
-git checkout ccf7325 ./store-frontend-instrumented-fixed
-git checkout ccf7325 ./store-frontend-broken-instrumented
-git checkout ccf7325 ./ads-service
-git checkout ccf7325 ./ads-service-fixed
-git checkout ccf7325 ./discounts-service
-git checkout ccf7325 ./discounts-service-fixed
-git checkout ccf7325 ./traffic-replay
+git checkout tags/2.0.0
+
+statusupdate files
 
 sed -i 's/--input-file requests_0.gor/--input-file "requests_0.gor|300%"/g' ./traffic-replay/Dockerfile
 #sed -i 's/ddtrace==0.28.0/ddtrace==0.41.0/g' ./ads-service/requirements.txt
