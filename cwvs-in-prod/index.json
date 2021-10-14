@@ -1,0 +1,102 @@
+{
+  "title": "Using Datadog RUM to track Core Web Vitals",
+  "description": "Introduction to using Datadog RUM to track Core Web Vitals",
+  "time": "60 minutes",
+  "difficulty": "Intermediate",
+  "details": {
+    "intro": {
+      "courseData": "background.sh",
+      "code": "foreground.sh",
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "text": "step1.md",
+        "title": "What are Core Web Vitals?"
+      },
+      {
+        "text": "step2.md",
+        "title": "Setting up Datadog RUM to collect metrics for CWVs"
+      },
+      {
+        "text": "step3.md",
+        "title": "Tracking CWVs in the Browser"
+      },
+      {
+        "text": "step4.md",
+        "title": "Tracking CWVs with Datadog RUM"
+      },
+      {
+        "text": "step5.md",
+        "title": "Using Datadog RUM to understand your CWV report in Production"
+      },
+      {
+        "text": "step6.md",
+        "title": "What to do with a bad CWV report"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "docker-compose.yml",
+          "target": "/root"
+        },
+        {
+          "file": "index.html.erb",
+          "target": "/root"
+        },
+        {
+          "file": "spree_application.html.erb",
+          "target": "/root"
+        },
+        {
+          "file": "home_controller.rb",
+          "target": "/root"
+        },
+        {
+          "file": "frontend-config.rb",
+          "target": "/root"
+        },
+        {
+          "file": "discounts.py",
+          "target": "/root"
+        },
+        {
+          "file": "discounts-requirements.txt",
+          "target": "/root"
+        },
+        {
+          "file": "ads.py",
+          "target": "/root"
+        },
+        {
+          "file": "ads-requirements.txt",
+          "target": "/root"
+        },
+        {
+          "file": "puppeteer.sh",
+          "target": "/root"
+        },
+        {
+          "file": "puppeteer-mobile.js",
+          "target": "/root"
+        }
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "terminal",
+    "showide": "true",
+    "uieditorpath": "/root/lab", 
+    "hideHiddenFiles": true,
+    "exclusionPatterns": ["**/store-frontend/tmp/*", "**/store-frontend/log/*"],
+    "showdashboard": true,
+    "dashboards": [{"name": "storedog", "port": 3000}]
+  },
+  "backend": {
+    "imageid": "datadog-base-v3"
+  }
+}
